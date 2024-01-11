@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>My Website</title>
+        <link rel="stylesheet" href="layout.css" type="text/css">
+
+        <script src="function.js"></script>
+    </head>
+
+    <body>
+        <div class="hero">
+            <nav>
+                <img src="images/highfiveslogo.png" class="logo" onclick="newPage1()">
+                <ul>
+                    <li><a href='#' onclick="goHome()">HOME</a></li>
+                    <li><a href='#' onclick="goSettings()">SETTINGS</a></li>
+                    <li><button onclick="revealCow()">GIF</button></li>
+                    <li><a href='#' onclick="goClose()">LOGOUT</a></li>
+                </ul>
+            </nav>
+            <div class="content">
+                <h1>High Fives</h1>
+                <a onclick="revealCow()">Share Gif</a>
+                <div class="gif">
+                    <img src="gifs/polish-cow-cow.gif">
+                </div>
+            </div>
+            <footer class="footer">High Fives &copy; 2024</footer>
+        </div>
+    </body>
+
+</html>
