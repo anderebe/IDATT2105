@@ -24,15 +24,12 @@ function changeGif() {
         setTimeout(function() {
             gifVideo.src = 'gifs/polish-cow-cow.gif';
             gifAudio.src = 'audio/polish-cow-cow.mp3';
-            button.style.color = 'white';
-            button.style.textShadow = 'none';
+            button.transform = 'rotate(180deg)';
         }, 200); // Add a delay of 200 milliseconds
     } else {
         setTimeout(function() {
             gifVideo.src = 'gifs/ahmed-musin.gif';
             gifAudio.src = 'audio/ahmed-musin.mp3';
-            button.style.color = 'blue';
-            button.style.textShadow = '0 0 5px white';
         }, 200); // Add a delay of 200 milliseconds
     }
 }
