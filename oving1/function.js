@@ -24,7 +24,6 @@ function changeGif() {
         setTimeout(function() {
             gifVideo.src = 'gifs/polish-cow-cow.gif';
             gifAudio.src = 'audio/polish-cow-cow.mp3';
-            button.transform = 'rotate(180deg)';
         }, 200); // Add a delay of 200 milliseconds
     } else {
         setTimeout(function() {
