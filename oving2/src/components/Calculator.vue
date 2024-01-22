@@ -40,25 +40,31 @@
 export default {
   data() {
     return {
-      equalBool: false,
-      previous: null,
-      memfirst: null,
-      memsecond: null,
       current: '0',
+      previous: null,
       operator: null,
-      previousOperator: null,
       operatorClicked: false,
       solution: null,
+
+      equalBool: false,
+      memfirst: null,
+      memsecond: null,
+      previousOperator: null,
+
     }
   },
     methods: {
       clear() {
-        this.current = '',
+        this.current = '0',
         this.previous = null,
         this.operator = null,
-        this.solution = '',
+        this.operatorClicked = false,
+        this.solution = null,
+      
         this.equalBool = false,
-        this.operatorClicked = false
+        this.memfirst = null,
+        this.memsecond = null,
+        this.previousOperator = null
       },
       sign() {
         if(this.current !== '0') {
@@ -93,6 +99,7 @@ export default {
       setPrevious(){
         if(this.operatorClicked === false && this.previousOperator !== null && this.solution === null){
           this.solution = `${this.previousOperator(parseFloat(this.current), parseFloat(this.previous))}`
+          this.previous = this.solution;
         } else if(this.solution !== null && this.operatorClicked === false && this.previous !== this.solution) {
           this.solution = `${this.previousOperator(parseFloat(this.solution), parseFloat(this.current))}`
           this.previous = this.solution;
