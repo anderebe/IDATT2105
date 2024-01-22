@@ -20,7 +20,7 @@
       <div @click="add" class = "btn operator">+</div>
       <div @click="append('0')" class = "btn zero">0</div>
       <div @click="dot()" class = "btn">,</div>
-      <div @click="equal" class = "btn operator">=</div>
+      <div @click="equal" class = "btn operator equal">=</div>
     </div>
   </div>
 </template>
@@ -117,30 +117,33 @@ export default {
 </script>
 
 <style scoped>
+
   .container {
     align-items: center;
-    display: flex;
     width: 100%;
     height: calc(100% * 1.5);
   }
 
   .calculator {
     margin: 0 auto;
+    width: 400px;
     font-size: 60px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: minmax(18%, auto);
-    border-radius: 10px;
   }
 
   .display {
     grid-column: 1 / 5;
     background-color: #424242;
     color: #fff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
   }
 
   .zero {
     grid-column: 1 / 3;
+    border-bottom-left-radius: 10px;
   }
 
   .btn {
@@ -152,6 +155,10 @@ export default {
 
   .operator {
     background-color: #FF9500;
+  }
+
+  .equal {
+    border-bottom-right-radius: 10px;
   }
 
   .options {
