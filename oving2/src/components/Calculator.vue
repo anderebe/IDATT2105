@@ -83,19 +83,19 @@ export default {
       },
       divide(){
         this.operator = (a, b) => a / b;
-        this.setPrevious();
+        this.setPrevious(); 
       },
       multiply(){
         this.operator = (a, b) => a * b;
-        this.setPrevious();
+        this.setPrevious(); 
       },
       subtract(){
         this.operator = (a, b) => a - b;
-        this.setPrevious();
+        this.setPrevious(); 
       },
       add(){
         this.operator = (a, b) => a + b;
-        this.setPrevious();
+        this.setPrevious(); 
       },
       equal(){
         if(this.previous === null) {
