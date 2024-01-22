@@ -88,7 +88,7 @@ export default {
             parseFloat(this.previous),
             parseFloat(this.current)
           )}`
-          this.operatorClicked = false;
+          this.operatorClicked = true;
         } else {
           this.previous = this.current;
           this.previousOperator = this.operator;
