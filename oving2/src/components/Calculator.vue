@@ -27,10 +27,11 @@
       <p>Previous: {{ previous }}</p>
       <p>Current: {{ current }}</p>
       <p>Operator: {{ operator }}</p>
-      <p>Previous Operator: {{ previousOperator }}</p>
       <p>Operator Clicked: {{ operatorClicked }}</p>
       <p>Memfirst: {{ memfirst }}</p>
       <p>Memsecond: {{ memsecond }}</p>
+      <p>Previous Operator: {{ previousOperator }}</p>
+      <p>Solution: {{ solution }}</p>
     </div>
   </div>
 </template>
@@ -39,6 +40,7 @@
 export default {
   data() {
     return {
+      equalBool: false,
       previous: null,
       memfirst: null,
       memsecond: null,
@@ -46,6 +48,7 @@ export default {
       operator: null,
       previousOperator: null,
       operatorClicked: false,
+      solution: null,
     }
   },
     methods: {
@@ -53,7 +56,8 @@ export default {
         this.current = '',
         this.previous = null,
         this.operator = null,
-
+        this.solution = '',
+        this.equalBool = false,
         this.operatorClicked = false
       },
       sign() {
@@ -70,8 +74,12 @@ export default {
           this.current = ''
           this.operatorClicked = false;
         }
-        if(this.current === '0' && number !== ',') {
+        if((this.current === '0' && number !== ',') || (this.current === this.previous && this.operatorClicked === false)) {
           this.current = '';
+        }
+        if(this.equalBool) {
+          this.current = '';
+          this.equalBool = false;
         }
         this.current = `${this.current}${number}`
       },
@@ -83,17 +91,17 @@ export default {
         }
       },
       setPrevious(){
-        if(this.previous !== null && this.operatorClicked === true) {
-          this.previous = `${this.previousOperator(
-            parseFloat(this.previous),
-            parseFloat(this.current)
-          )}`
-          this.operatorClicked = true;
+        if(this.operatorClicked === false && this.previousOperator !== null && this.solution === null){
+          this.solution = `${this.previousOperator(parseFloat(this.current), parseFloat(this.previous))}`
+        } else if(this.solution !== null && this.operatorClicked === false && this.previous !== this.solution) {
+          this.solution = `${this.previousOperator(parseFloat(this.solution), parseFloat(this.current))}`
+          this.previous = this.solution;
         } else {
           this.previous = this.current;
-          this.previousOperator = this.operator;
-          this.operatorClicked = true;
         }
+        this.previousOperator = this.operator;
+        this.operatorClicked = true;
+        
       },
       divide(){
         this.operator = (a, b) => a / b;
@@ -112,19 +120,25 @@ export default {
         this.setPrevious(); 
       },
       equal(){
-        if(this.previous === null) {
+        if(this.previous === null && this.equalBool === false) {
           return;
         }
-        this.memfirst = this.previous;
-        this.memsecond = this.current;
-        this.previousOperator = this.operator;
-        
-        this.current = `${this.operator(
-          parseFloat(this.previous),
-          parseFloat(this.current)
-        )}`
-        this.previous = null;
-        
+
+        if(this.equalBool) {
+          this.memfirst = this.current;
+          this.current = `${this.previousOperator( parseFloat(this.current), parseFloat(this.memsecond))}`
+        } else {
+          this.memfirst = this.previous;
+          this.memsecond = this.current;
+          this.previousOperator = this.operator;
+          
+          this.current = `${this.operator(
+            parseFloat(this.previous),
+            parseFloat(this.current)
+          )}`
+          this.previous = null;
+          this.equalBool = true;
+        }
       }
     }
   }
@@ -134,7 +148,8 @@ export default {
 
   .container {
     display: flex;
-    flex-flow: row;
+    justify-content: center;
+    flex-flow: row;;
     width: 100%;;
   }
 
