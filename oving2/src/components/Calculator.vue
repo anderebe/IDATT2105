@@ -22,6 +22,16 @@
       <div @click="dot()" class = "btn">,</div>
       <div @click="equal" class = "btn operator equal">=</div>
     </div>
+    <div class="log">
+      <h1>Log</h1>
+      <p>Previous: {{ previous }}</p>
+      <p>Current: {{ current }}</p>
+      <p>Operator: {{ operator }}</p>
+      <p>Previous Operator: {{ previousOperator }}</p>
+      <p>Operator Clicked: {{ operatorClicked }}</p>
+      <p>Memfirst: {{ memfirst }}</p>
+      <p>Memsecond: {{ memsecond }}</p>
+    </div>
   </div>
 </template>
 
@@ -40,7 +50,11 @@ export default {
   },
     methods: {
       clear() {
-        this.current = ''
+        this.current = '',
+        this.previous = null,
+        this.operator = null,
+
+        this.operatorClicked = false
       },
       sign() {
         if(this.current !== '0') {
@@ -69,12 +83,12 @@ export default {
         }
       },
       setPrevious(){
-        if(this.previous !== null) {
+        if(this.previous !== null && this.operatorClicked === true) {
           this.previous = `${this.previousOperator(
             parseFloat(this.previous),
             parseFloat(this.current)
           )}`
-          this.operatorClicked = true;
+          this.operatorClicked = false;
         } else {
           this.previous = this.current;
           this.previousOperator = this.operator;
@@ -119,9 +133,18 @@ export default {
 <style scoped>
 
   .container {
-    align-items: center;
-    width: 100%;
-    height: calc(100% * 1.5);
+    display: flex;
+    flex-flow: row;
+    width: 100%;;
+  }
+
+  .log {
+    margin: 0 auto;
+    width: 400px;
+    color: #fff;
+    background-color: #424242;
+    margin: 1%;
+    border-radius: 10px;
   }
 
   .calculator {
@@ -130,7 +153,8 @@ export default {
     font-size: 60px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: minmax(18%, auto);
+    grid-auto-rows: minmax(0, auto);
+    margin: 1%;
   }
 
   .display {
@@ -147,14 +171,23 @@ export default {
   }
 
   .btn {
+    display: flex;
+    justify-content: center;
     color: #fff;
     background-color: #a6a6a6;
     border: 0.5px solid #000;
     cursor: pointer;
+    text-align: center;
+  }
+  .btn:hover {
+    background-color: #b3b3b3;
   }
 
   .operator {
     background-color: #FF9500;
+  }
+  .operator:hover {
+    background-color: #FFA500;
   }
 
   .equal {
@@ -163,6 +196,9 @@ export default {
 
   .options {
     background-color: #757575;
+  }
+  .options:hover {
+    background-color: #808080;
   }
 
 </style>
