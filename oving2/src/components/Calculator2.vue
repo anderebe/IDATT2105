@@ -26,9 +26,9 @@
       </div>
       <div class="log">
         <h1>Log</h1>
-        <transitionwall class="equation-wall" ref="equationWall">
+        <div class="equation-wall" ref="equationWall">
             <div v-for="equation in equations" :key="equation" class="equation">{{ equation }}</div>
-        </transitionwall>
+        </div>
       </div>
     </div>
 </template>
