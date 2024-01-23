@@ -1,4 +1,5 @@
 <template>
+    <h1>Øving 2: Kalkulator</h1>
     <div class ="container">
       <div class="calculator">
         <div class="display">{{ current || '0' }}</div>
@@ -19,27 +20,29 @@
         <div @click="append('3')" class = "btn">3</div>
         <div @click="add" class = "btn operator">+</div>
         <div @click="append('0')" class = "btn zero">0</div>
-        <div @click="dot()" class = "btn">,</div>
+        <div @click="dot()" class = "btn">.</div>
+        <div @click="answer()" class = "btn">ans</div>
         <div @click="equal" class = "btn operator equal">=</div>
       </div>
       <div class="log">
         <h1>Log</h1>
-        <div class="equation-wall" ref="equationWall">
+        <transitionwall class="equation-wall" ref="equationWall">
             <div v-for="equation in equations" :key="equation" class="equation">{{ equation }}</div>
-        </div>
+        </transitionwall>
       </div>
     </div>
 </template>
   
 <script scoped>
   export default {
-        data() {
-      return {
-        current: '0',
-        equations: [], 
-        solution: null,
-      }
-        },
+      data() {
+        return {
+          current: '0',
+          equations: [], 
+          solution: null,
+          ans: null,
+        }
+      },
       methods: {
         clear() {
           this.current = '0';
@@ -47,7 +50,10 @@
           this.solution = null;
         },
         append(number) {
-            if(this.current === '0' || this.current === this.solution) {
+            if((this.current === '0' && number !== '.') 
+              || this.current.includes('Error') 
+              || this.current.includes('NaN')
+              || this.current === this.solution) {
                 this.current = '';
             }
             this.current = this.current + number;
@@ -61,11 +67,11 @@
                 this.solution = this.current;
               } 
             } catch {
-              this.current = 'Error';
+              this.current = 'Error: Function not supported';
             }
         },
         dot() {
-          if(this.current === '0' || this.current !== this.solution) {
+          if(this.current === '0') {
             if(this.current.indexOf('.') === -1) {
             this.append('.')
             } else {
@@ -107,16 +113,29 @@
             }
         },
         equal() {
-            try {
-                const equation = this.current + ' = ' + eval(this.current);
-                this.equations.push(equation);
-                this.current = eval(this.current);
-                this.solution = this.current;
-            } catch {
-                this.current = 'Error';
+          try {
+            if(this.current.includes('ans')) {
+              this.current = this.current.replace('ans', this.solution);
             }
+            const result = eval(this.current);
+            if (result === Infinity || result === -Infinity) {
+              throw new Error('Error: Division by zero');
+            }
+            const equation = this.current + ' = ' + result;
+            this.equations.unshift(equation);
+            this.current = result + '';
+            this.solution = this.current;
+            this.ans = this.solution
+          } catch (error) {
+            this.current = 'Error: ' + error.message;
+          }
         },
-      }
+        answer() {
+          if(this.solution !== null) {
+            this.current = 'ans';
+          }
+        }
+      },
     }
   </script>
   
@@ -126,7 +145,7 @@
       display: flex;
       justify-content: center;
       flex-flow: row;
-      width: 100%;;
+      width: 100%;
     }
   
     .log {
@@ -137,19 +156,21 @@
       border-radius: 10px;
       max-height: 400px; 
       align-items: center;
+      
     }
-
     .equation-wall {
       margin-top: 5%;
       margin-bottom: 5%;
       flex-flow: column;
       justify-content: center;
-      height: 80%;
+      height: 70%;
+      overflow: hidden;
+      overflow-y: scroll;
     }
     .calculator {
       margin: 0 auto;
       width: 400px;
-      font-size: 60px;
+      font-size: 50px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       grid-auto-rows: minmax(0, auto);
@@ -158,7 +179,7 @@
     }
   
     .display {
-        cursor: pointer;
+        cursor: default;
         grid-column: 1 / 5;
         background-color: #424242;
         color: #fff;
@@ -168,12 +189,11 @@
     }
 
     .zero {
-      grid-column: 1 / 3;
+      grid-column: 1 / 1;
       border-bottom-left-radius: 10px;
     }
   
     .btn {
-      display: flex;
       justify-content: center;
       color: #fff;
       background-color: #a6a6a6;
@@ -184,12 +204,18 @@
     .btn:hover {
       background-color: #b3b3b3;
     }
+    .btn:active {
+      background-color: #999999;
+    }
   
     .operator {
       background-color: #FF9500;
     }
     .operator:hover {
       background-color: #FFA500;
+    }
+    .operator:active {
+      background-color: #FF8C00;
     }
   
     .equal {
@@ -201,6 +227,9 @@
     }
     .options:hover {
       background-color: #808080;
+    }
+    .options:active {
+      background-color: #6d6d6d;
     }
   
   </style>
