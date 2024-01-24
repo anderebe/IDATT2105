@@ -1,21 +1,23 @@
-<template>
+<template> 
   <div class="hero">
     <nav>
       <img src="../assets/images/highfiveslogo.png" class="logo" @click="newPage1">
       <ul>
-        <li><a href='#' @click="goHome">HOME</a></li>
-        <li><a href='#' @click="goSettings">SETTINGS</a></li>
-        <li><a href='#' @click="toCalculator">CALCULATOR</a></li>
-        <li><a class='gif-button' @click="changeGif">GIF</a></li>
-        <li><a href='#' @click="goClose">LOGOUT</a></li>
+        <li><a href='#' @click="goHome()">HOME</a></li>
+        <li><a href='#' @click="goSettings()">SETTINGS</a></li>
+        <li><a href='#' @click="toCalculator()">CALCULATOR</a></li>
+        <li><a class='gif-button' @click="changeGif()">GIF</a></li>
+        <li><a href='#' @click="goClose()">LOGOUT</a></li>
       </ul>
     </nav>
     <div class="content">
       <h1>High Fives</h1>
-      <a @click="revealCow">Share Gif</a>
+      <a @click="revealCow(event)">Share Gif</a>
       <div class="gif">
-        <img src="../assets/gifs/polish-cow-cow.gif">
-        <audio loop src="../assets/audio/polish-cow-cow.mp3"></audio>
+        <img :src="gifSrc">
+        <audio loop>
+          <source :src="audioSrc">
+        </audio>
       </div>
     </div>
     <footer class="footer">High Fives &copy; 2024</footer>
@@ -24,6 +26,12 @@
 
 <script>
 export default {
+  data() {
+    return {
+      gifSrc: require("../assets/gifs/polish-cow-cow.gif"),
+      audioSrc: require("../assets/audio/polish-cow-cow.mp3")
+    }
+  },
   methods: {
     revealCow() {
       var gifVideo = document.querySelector('.gif img');
@@ -39,21 +47,21 @@ export default {
     },
 
     changeGif() {
-      var gifVideo = document.querySelector('.gif img');
-      var gifAudio = document.querySelector('.gif audio');
+      var gifSrc = document.querySelector('.gif img');
+      var audioSrc = document.querySelector('.gif audio');
 
-      gifVideo.style.opacity = '0';
-      gifAudio.pause();
+      gifSrc.style.opacity = '0';
+      audioSrc.pause();
 
-      if (gifVideo.src.includes('ahmed-musin.gif')) {
+      if (gifSrc.src.includes('ahmed-musin.gif')) {
         setTimeout(function() {
-          gifVideo.src = '../assets/gifs/polish-cow-cow.gif';
-          gifAudio.src = '../assets/audio/polish-cow-cow.mp3';
+          gifSrc.src = require("../assets/gifs/polish-cow-cow.gif"),
+          audioSrc.src = require("../assets/audio/polish-cow-cow.mp3")
         }, 200); // Add a delay of 200 milliseconds
       } else {
         setTimeout(function() {
-          gifVideo.src = '../assets/gifs/ahmed-musin.gif';
-          gifAudio.src = '../assets/audio/ahmed-musin.mp3';
+          gifSrc.src = require("../assets/gifs/ahmed-musin.gif"),
+          audioSrc.src = require("../assets/audio/ahmed-musin.mp3")
         }, 200); // Add a delay of 200 milliseconds
       }
     },
@@ -77,25 +85,19 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   *{
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
       font-family: system-ui;
   }
-
   .hero{
-      width: 100%;
       height: 300vh;
       
-
       background-color: #074f57;
       background-image: url("../assets/images/landscapecss2.jpg");
 
       background-size: cover;
-      background-repeat: repeat;
+      background-repeat: no-repeat;
 
       position: relative;
       display: flex;
@@ -161,8 +163,10 @@ export default {
       transform: scaleX(1);
   }
 
+
+  
   .content{
-      margin-top: 200px;
+      margin-top: 100px;
       text-align: center;
       align-items: center;
       display: flex;
@@ -191,7 +195,6 @@ export default {
       border: 2px solid white;
       padding: 14px 70px;
       border-radius: 50px;
-      margin-top: 20px;
       cursor: pointer;
       transition: background-color 0.5s ease-in-out;
   }
