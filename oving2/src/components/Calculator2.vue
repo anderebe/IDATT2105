@@ -27,10 +27,11 @@
       <div class="log">
         <h1>Log</h1>
         <div class="equation-wall" ref="equationWall">
-            <div v-for="equation in equations" :key="equation" class="equation">{{ equation }}</div>
+          <div v-for="equation in equations" :key="equation" class="equation">{{ equation }}</div>
         </div>
       </div>
     </div>
+    <div @click="remove()" class = "btn options del">del</div>
 </template>
   
 <script scoped>
@@ -67,7 +68,7 @@
                 this.solution = this.current;
               } 
             } catch {
-              this.current = 'Error: Function not supported';
+              throw new Error('Invalid input');
             }
         },
         dot() {
@@ -119,7 +120,7 @@
             }
             const result = eval(this.current);
             if (result === Infinity || result === -Infinity) {
-              throw new Error('Error: Division by zero');
+              throw new Error('Division by zero');
             }
             const equation = this.current + ' = ' + result;
             this.equations.unshift(equation);
@@ -134,6 +135,9 @@
           if(this.solution !== null) {
             this.current = 'ans';
           }
+        },
+        remove(){
+          this.current = this.current.slice(0, -1);
         }
       },
     }
@@ -230,6 +234,10 @@
     }
     .options:active {
       background-color: #6d6d6d;
+    }
+    
+    .del{
+      border-radius: 10px;
     }
   
   </style>
