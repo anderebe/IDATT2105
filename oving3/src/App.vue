@@ -1,7 +1,7 @@
 <template>
-  <nav-header />
+  <NavHeader @toCalculator="handleToCalculator"></NavHeader>
 
-  <Content />
+  <component :is="currentComponent" />
 
   <footer>
     <p>© 2024</p>
@@ -11,13 +11,29 @@
 
 <script>
 import NavHeader from './components/NavHeader.vue'
-import Content from './components/GifContent.vue'
+import GifContent from './components/GifContent.vue'
+import CalculatorContent from './components/CalculatorContent.vue'
 
 export default {
   name: 'App',
   components: {
     NavHeader,
-    Content,
+    GifContent,
+    CalculatorContent,
+  },
+  data() {
+    return {
+      currentComponent: 'GifContent',
+    }
+  },
+  methods: {
+    handleToCalculator() {
+      if(this.currentComponent === 'GifContent'){
+        this.currentComponent = 'CalculatorContent';
+      } else {
+        this.currentComponent = 'GifContent';
+      }
+    },
   }
 }
 </script>

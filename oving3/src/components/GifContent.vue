@@ -13,6 +13,7 @@
 import { ref } from 'vue';
 
 export default {
+    name: 'GifContent',
     setup() {
         const gifVideo = ref(require("../assets/gifs/polish-cow-cow.gif"));
         const gifAudio = ref(require("../assets/audio/polish-cow-cow.mp3"));

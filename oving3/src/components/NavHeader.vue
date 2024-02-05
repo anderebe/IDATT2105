@@ -3,17 +3,24 @@
         <img src="../assets/images/highfiveslogo.png" class="logo" @click="newPage1">
         <ul>
             <li><a href='#' @click="goHome">HOME</a></li>
-            <li><a href='#' @click="goSettings">SETTINGS</a></li>
             <li><a href='#' @click="toCalculator">CALCULATOR</a></li>
+            <li><a href='#' @click="goFeedback">FEEDBACK</a></li>
             <li><a href='#' @click="goClose">LOGOUT</a></li>
         </ul>
     </nav>
-  </template>
+</template>
 
 <script>
-
 export default {
-
+    name: 'NavHeader',
+    methods: {
+        toCalculator() {
+            this.$emit('toCalculator');
+        },
+        goFeedback() {
+            this.$emit('goFeedback');
+        },
+    }
 }
 </script>
 
