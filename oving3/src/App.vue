@@ -1,17 +1,23 @@
 <template>
   <nav-header />
-  <div class = 'content'>
-    <h1>Velkommen til min side!</h1>
-  </div>
+
+  <Content />
+
+  <footer>
+    <p>© 2024</p>
+  </footer>
+
 </template>
 
 <script>
 import NavHeader from './components/NavHeader.vue'
+import Content from './components/GifContent.vue'
 
 export default {
   name: 'App',
   components: {
     NavHeader,
+    Content,
   }
 }
 </script>
@@ -32,10 +38,22 @@ export default {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    
   }
 
-  content{
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-
   
 </style>

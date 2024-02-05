@@ -5,7 +5,6 @@
             <li><a href='#' @click="goHome">HOME</a></li>
             <li><a href='#' @click="goSettings">SETTINGS</a></li>
             <li><a href='#' @click="toCalculator">CALCULATOR</a></li>
-            <li><a class='gif-button' @click="changeGif">GIF</a></li>
             <li><a href='#' @click="goClose">LOGOUT</a></li>
         </ul>
     </nav>
@@ -21,7 +20,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   nav{
-      width: 95%;
+      width: 98%;
       height: 10vh;
       position: absolute;
       top: 0;
@@ -34,7 +33,7 @@ export default {
   nav .logo{
       width: 80px;
       margin-top: 5px;
-      margin-left: 5px;
+      margin-left: 10px;
       cursor: pointer;
   }
 
