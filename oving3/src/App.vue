@@ -1,7 +1,14 @@
 <template>
-  <NavHeader @toCalculator="handleToCalculator"></NavHeader>
+  <NavHeader 
+    @goHome="handleToHome"
+    @goCalculator="handleToCalculator" 
+    @goFeedback="handleToFeedback">
 
-  <component :is="currentComponent" />
+</NavHeader>
+
+  <component :is="currentComponent" 
+  @goFeedback="handleToFeedback">
+</component>
 
   <footer>
     <p>© 2024</p>
@@ -13,6 +20,7 @@
 import NavHeader from './components/NavHeader.vue'
 import GifContent from './components/GifContent.vue'
 import CalculatorContent from './components/CalculatorContent.vue'
+import FeedbackContent from './components/FeedbackContent.vue'
 
 export default {
   name: 'App',
@@ -20,6 +28,7 @@ export default {
     NavHeader,
     GifContent,
     CalculatorContent,
+    FeedbackContent,
   },
   data() {
     return {
@@ -27,14 +36,27 @@ export default {
     }
   },
   methods: {
+    handleToHome() {
+      if(this.currentComponent !== 'GifContent'){
+        this.currentComponent = 'GifContent';
+      }
+    },
     handleToCalculator() {
-      if(this.currentComponent === 'GifContent'){
+      if(this.currentComponent !== 'CalculatorContent'){
         this.currentComponent = 'CalculatorContent';
       } else {
         this.currentComponent = 'GifContent';
       }
     },
-  }
+    handleToFeedback() {
+      if(this.currentComponent !== 'FeedbackContent'){
+        this.currentComponent = 'FeedbackContent';
+      } else {
+        this.currentComponent = 'GifContent';
+      }
+    }
+  },
+
 }
 </script>
 

@@ -2,10 +2,10 @@
     <nav>
         <img src="../assets/images/highfiveslogo.png" class="logo" @click="newPage1">
         <ul>
-            <li><a href='#' @click="goHome">HOME</a></li>
+            <li><a href='#' @click="toHome">HOME</a></li>
             <li><a href='#' @click="toCalculator">CALCULATOR</a></li>
-            <li><a href='#' @click="goFeedback">FEEDBACK</a></li>
-            <li><a href='#' @click="goClose">LOGOUT</a></li>
+            <li><a href='#' @click="toFeedback">FEEDBACKS</a></li>
+            <li><a href='#' @click="toClose">LOGOUT</a></li>
         </ul>
     </nav>
 </template>
@@ -14,10 +14,13 @@
 export default {
     name: 'NavHeader',
     methods: {
-        toCalculator() {
-            this.$emit('toCalculator');
+        toHome() {
+            this.$emit('goHome');
         },
-        goFeedback() {
+        toCalculator() {
+            this.$emit('goCalculator');
+        },
+        toFeedback() {
             this.$emit('goFeedback');
         },
     }
@@ -38,8 +41,7 @@ export default {
   }
 
   nav .logo{
-      width: 80px;
-      margin-top: 5px;
+      width: 60px;
       margin-left: 10px;
       cursor: pointer;
   }

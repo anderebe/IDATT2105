@@ -1,5 +1,5 @@
 <template>
-    <h1>High Fives: Oving 2</h1>
+    <h1>Oving 2: Kalkulator</h1>
     <div class ="container">
       <div class="calculator">
         <div class="display">{{ current || '0' }}</div>
@@ -31,6 +31,7 @@
         </div>
       </div>
     </div>
+    <div @click="toFeedback()" class ="feedback">FEEDBACK</div>
     
 </template>
   
@@ -150,6 +151,9 @@
             this.current = 'ans';
           }
         },
+        toFeedback() {
+            this.$emit('goFeedback');
+        },
       },
     }
   </script>  
@@ -157,15 +161,18 @@
   <style scoped>
   
     h1{
+      margin-top: 15%;
       color: white;
       font-weight: 700;
+      transition-duration: 0.5s;
+      cursor: default;
     }
+
     .container {
       display: flex;
       justify-content: center;
       flex-flow: row;
       width: 100%;
-      margin-top: 10%;
     }
   
     .log {
@@ -176,7 +183,7 @@
       border-radius: 10px;
       max-height: 400px; 
       align-items: center;
-      
+      cursor: default
     }
     .equation-wall {
       margin-top: 5%;
@@ -251,6 +258,35 @@
     .options:active {
       background-color: #6d6d6d;
     }
+
+    .feedback {
+      text-decoration: none;
+      margin-top: 5%;
+      margin-bottom: 5%;
+      text-align: center;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      transition: color 0.5s ease-in-out, -webkit-text-stroke 0.5s ease-in-out;
+      align-items: center;
+      position: relative; /* Added */
+      display: inline-block; /* Added */
+    }
   
+    .feedback::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: white;
+      transform: scaleX(0);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .feedback:hover::after {
+      transform: scaleX(1);
+    }
   </style>
   
