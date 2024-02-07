@@ -69,9 +69,9 @@ export default {
   data() {
     return {
       feedbacks: [],
-      forename: "",
-      surname: "",
-      mail: "",
+      forename: localStorage.getItem("forename") || "",
+      surname: localStorage.getItem("surname") || "",
+      mail: localStorage.getItem("mail") || "",
       comment: "",
       forenameError: " ",
       surnameError: " ",
@@ -82,6 +82,9 @@ export default {
     };
   },
   methods: {
+    handleSubmit() {
+      alert("Success! Form submitted!");
+    },
     feedbacksubmit() {
       this.checkError();
       let feedback = {
@@ -90,12 +93,20 @@ export default {
         mail: this.mail,
         comment: this.comment,
       };
+      // Save data to local storage
+      this.saveData();
       this.feedbacks.push(feedback);
       // Reset input fields
       this.forename = "";
       this.surname = "";
       this.mail = "";
       this.comment = "";
+      this.handleSubmit();
+    },
+    saveData() {
+      localStorage.setItem("forename", this.forename);
+      localStorage.setItem("surname", this.surname);
+      localStorage.setItem("mail", this.mail);
     },
 
     validateForename() {
@@ -143,6 +154,9 @@ export default {
       } else {
         this.commentError = "";
       }
+      this.validateForename();
+      this.validateSurname();
+      this.validateMail();
       this.checkError();
     },
     checkError() {
