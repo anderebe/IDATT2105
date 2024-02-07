@@ -80,12 +80,20 @@ export default {
     sign() {
       try {
         if (this.current !== "0") {
-          const lastNumber = this.current.match(/\d+$/)[0];
+          const match = this.current.match(/-?\d+\.?\d*$/);
+          if (!match) {
+            // If this.current ends with an operator, return without making any changes
+            return;
+          }
+          const lastNumber = match[0];
           const sign = lastNumber.startsWith("-") ? "" : "-";
-          this.current = this.current.replace(/\d+$/, sign + lastNumber);
+          this.current =
+            this.current.slice(0, this.current.lastIndexOf(lastNumber)) +
+            sign +
+            Math.abs(lastNumber);
           this.solution = this.current;
         }
-      } catch {
+      } catch (error) {
         throw new Error("Invalid input");
       }
     },
@@ -158,7 +166,7 @@ export default {
         }
         const result = eval(this.current);
         if (result === Infinity || result === -Infinity) {
-          throw new Error("Division by zero");
+          throw new Error("n/0");
         }
         const equation = this.current + " = " + result;
         this.equations.unshift(equation);

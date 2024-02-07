@@ -135,11 +135,11 @@ export default {
       ) {
         this.mailError =
           "Invalid email address: " +
-          (this.mail.includes("@") ? "" : ": missing '@'") +
-          (this.mail.includes(".") ? "" : ", missing '.'") +
-          (/[a-zA-Z]/.test(this.mail) ? "" : ", missing letters");
+          (this.mail.includes("@") ? "" : ": missing '@', ") +
+          (this.mail.includes(".") ? "" : "missing '.', ") +
+          (/[a-zA-Z]/.test(this.mail) ? "" : "missing letters");
         if (this.mail.indexOf("@") !== this.mail.lastIndexOf(".")) {
-          this.mailError += ", missing letters between @ and .";
+          this.mailError += "missing letters between '@' and '.'";
         }
         this.error = true;
       } else {
