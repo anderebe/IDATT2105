@@ -1,58 +1,14 @@
 <template>
-  <NavHeader
-    @goHome="handleToHome"
-    @goCalculator="handleToCalculator"
-    @goFeedback="handleToFeedback"
-  >
-  </NavHeader>
-
-  <component :is="currentComponent" @goFeedback="handleToFeedback"> </component>
+  <RouterView />
 
   <footer>
     <p>© 2024</p>
   </footer>
 </template>
 
-<script>
-import NavHeader from "./components/NavHeader.vue";
-import GifContent from "./components/GifContent.vue";
-import CalculatorContent from "./components/CalculatorContent.vue";
-import FeedbackContent from "./components/FeedbackContent.vue";
+<script></script>
 
-export default {
-  name: "App",
-  components: {
-    NavHeader,
-    GifContent,
-    CalculatorContent,
-    FeedbackContent,
-  },
-  data() {
-    return {
-      currentComponent: "GifContent",
-    };
-  },
-  methods: {
-    handleToHome() {
-      if (this.currentComponent !== "GifContent") {
-        this.currentComponent = "GifContent";
-      }
-    },
-    handleToCalculator() {
-      if (this.currentComponent !== "CalculatorContent") {
-        this.currentComponent = "CalculatorContent";
-      }
-    },
-    handleToFeedback() {
-      if (this.currentComponent !== "FeedbackContent") {
-        this.currentComponent = "FeedbackContent";
-      }
-    },
-  },
-};
-</script>
-
-<style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -60,6 +16,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   grid-row: auto;
+}
+
+html,
+body {
+  height: 300vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
 }
 
 body {

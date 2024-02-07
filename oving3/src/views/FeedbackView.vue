@@ -1,19 +1,18 @@
 <template>
-  <body>
+  <div class="feedback">
     <NavHeader />
-    <GifContent />
-  </body>
+    <Feedback />
+  </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import NavHeader from "@/components/NavHeader.vue";
-import GifContent from "@/components/GifContent.vue";
+import Feedback from "@/components/FeedbackContent.vue";
 
 export default {
-  name: "HomeView",
+  name: "FeedbackView",
   components: {
-    GifContent,
+    Feedback,
     NavHeader,
   },
 };

@@ -1,19 +1,17 @@
 <template>
-  <body>
-    <NavHeader />
-    <GifContent />
-  </body>
+  <NavHeader />
+  <CalculatorContent />
 </template>
 
 <script>
 // @ is an alias to /src
 import NavHeader from "@/components/NavHeader.vue";
-import GifContent from "@/components/GifContent.vue";
+import CalculatorContent from "@/components/CalculatorContent.vue";
 
 export default {
-  name: "HomeView",
+  name: "CalculatorView",
   components: {
-    GifContent,
+    CalculatorContent,
     NavHeader,
   },
 };

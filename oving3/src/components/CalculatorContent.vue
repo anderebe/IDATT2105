@@ -33,7 +33,7 @@
       </div>
     </div>
   </div>
-  <div @click="toFeedback()" class="feedback">FEEDBACK</div>
+  <div><router-link to="/feedback" class="feedback">FEEDBACK</router-link></div>
 </template>
 
 <script scoped>

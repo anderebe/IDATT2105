@@ -6,30 +6,19 @@
       @click="newPage1"
     />
     <ul>
-      <li><a href="#" @click="toHome">HOME</a></li>
-      <li><a href="#" @click="toCalculator">CALCULATOR</a></li>
-      <li><a href="#" @click="toFeedback">FEEDBACKS</a></li>
-      <li><a href="#" @click="toClose">LOGOUT</a></li>
+      <li><router-link to="/" class="nav-link">HOME</router-link></li>
+      <li>
+        <router-link to="/calculator" class="nav-link">CALCULATOR</router-link>
+      </li>
+      <li>
+        <router-link to="/feedback" class="nav-link">FEEDBACKS</router-link>
+      </li>
+      <li><router-link to="/logout" class="nav-link">LOGOUT</router-link></li>
     </ul>
   </nav>
 </template>
 
-<script>
-export default {
-  name: "NavHeader",
-  methods: {
-    toHome() {
-      this.$emit("goHome");
-    },
-    toCalculator() {
-      this.$emit("goCalculator");
-    },
-    toFeedback() {
-      this.$emit("goFeedback");
-    },
-  },
-};
-</script>
+<script></script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
@@ -54,13 +43,7 @@ nav .logo:active {
   transform: translateY(1px);
 }
 
-nav ul li {
-  list-style: none;
-  display: inline-block;
-  margin-left: 20px;
-}
-
-nav ul li a {
+.nav-link {
   text-decoration: none;
   color: white;
   font-size: 17px;
@@ -68,11 +51,7 @@ nav ul li a {
   cursor: pointer;
 }
 
-.gif-button {
-  color: white;
-}
-
-nav ul li a::after {
+.nav-link::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -84,7 +63,17 @@ nav ul li a::after {
   transition: transform 0.3s ease-in-out;
 }
 
-nav ul li a:hover::after {
+.nav-link:hover::after {
   transform: scaleX(1);
+}
+
+.gif-button {
+  color: white;
+}
+
+nav ul li {
+  list-style: none;
+  display: inline-block;
+  margin-left: 20px;
 }
 </style>
