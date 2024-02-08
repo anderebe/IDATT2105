@@ -1,10 +1,8 @@
 <template>
   <nav>
-    <img
-      src="../assets/images/highfiveslogo.png"
-      class="logo"
-      @click="newPage1"
-    />
+    <router-link to="/" class="logo">
+      <img src="../assets/images/highfiveslogo.png" class="logo" />
+    </router-link>
     <ul>
       <li><router-link to="/" class="nav-link">HOME</router-link></li>
       <li>
