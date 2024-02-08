@@ -4,6 +4,12 @@ import FeedbackContent from "@/components/FeedbackContent.vue";
 describe("FeedbackContent", () => {
   let wrapper;
 
+  global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve({}),
+  })
+  );
+
   beforeEach(() => {
     wrapper = shallowMount(FeedbackContent);
   });

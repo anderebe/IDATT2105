@@ -86,17 +86,14 @@ export default {
       let submit = document.querySelector(".submit");
       setTimeout(() => {
         submit.textContent = "Success!";
-        submit.style.backgroundColor = "lime";
+        submit.style.backgroundColor = "rgba(0, 128, 0, 0.5)";
         submit.style.opacity = "0.5";
         setTimeout(() => {
           submit.style.backgroundColor = "transparent";
-          submit.style.opacity = "1";
+          submit.textContent = "Submit";
           this.granted = false;
         }, 2000);
       }, 100);
-
-      submit.style.backgroundColor = "transparent";
-      submit.textContent = "Submit";
     },
     feedbacksubmit() {
       this.checkError();
@@ -115,6 +112,21 @@ export default {
       this.mail = "";
       this.comment = "";
       this.handleSubmit();
+      // Send feedback to the server
+      fetch("http://localhost:3000/feedbacks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(feedback),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     },
     saveData() {
       localStorage.setItem("forename", this.forename);
