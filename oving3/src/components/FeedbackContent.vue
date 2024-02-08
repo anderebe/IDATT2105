@@ -83,7 +83,20 @@ export default {
   },
   methods: {
     handleSubmit() {
-      alert("Success! Form submitted!");
+      let submit = document.querySelector(".submit");
+      setTimeout(() => {
+        submit.textContent = "Success!";
+        submit.style.backgroundColor = "lime";
+        submit.style.opacity = "0.5";
+        setTimeout(() => {
+          submit.style.backgroundColor = "transparent";
+          submit.style.opacity = "1";
+          this.granted = false;
+        }, 2000);
+      }, 100);
+
+      submit.style.backgroundColor = "transparent";
+      submit.textContent = "Submit";
     },
     feedbacksubmit() {
       this.checkError();
