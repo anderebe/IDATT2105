@@ -1,43 +1,43 @@
 {
   "feedbacks": [
     {
-      "id": 1,
+      "id": "1",
       "response": "success"
     },
     {
-      "id": "02f8",
-      "forename": "iiga",
-      "surname": "biiga",
-      "mail": "iiga@booga.com",
-      "comment": "asløfksakjghskdjgh"
+      "id": "26bb",
+      "forename": "asødknasd",
+      "surname": "asløkfjalskf",
+      "mail": "ooga@booga.com",
+      "comment": "asløfjalskfjlaksjflak"
     },
     {
-      "id": "7bc8",
-      "forename": "emil",
-      "surname": "bergan",
-      "mail": "noens@mail.com",
-      "comment": "Her er en kommentar jeg håper funker"
+      "id": "1b41",
+      "forename": "Fredrik",
+      "surname": "Studass",
+      "mail": "studass@gmail.cos",
+      "comment": "asdljaslkdjaslkjd"
     },
     {
-      "id": "0ad6",
+      "id": "27b2",
       "forename": "Fredrik",
       "surname": "Studass",
       "mail": "studass@gmail.com",
-      "comment": "Håer jeg får godkjent her"
+      "comment": "asdlkasjsdlkasjd"
     },
     {
-      "id": "a7b7",
-      "forename": "John",
-      "surname": "Doe",
-      "mail": "john.doe@example.com",
-      "comment": "This is a valid comment"
+      "id": "ece4",
+      "forename": "Fredrik",
+      "surname": "Studass",
+      "mail": "ooga@booga.com",
+      "comment": "LAskjdlkasjdlaksjdla"
     },
     {
-      "id": "2cf7",
-      "forename": "John",
-      "surname": "Doe",
-      "mail": "john.doe@example.com",
-      "comment": "This is a valid comment"
+      "id": "8587",
+      "forename": "Fredrik",
+      "surname": "booga",
+      "mail": "iiga@booga.com",
+      "comment": "asdasdasdasdasd"
     }
   ]
 }

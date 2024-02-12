@@ -68,10 +68,9 @@ export default {
   name: "FeedbackContent",
   data() {
     return {
-      feedbacks: [],
-      forename: localStorage.getItem("forename") || "",
-      surname: localStorage.getItem("surname") || "",
-      mail: localStorage.getItem("mail") || "",
+      forename: this.$store.state.forename || "",
+      surname: this.$store.state.surname || "",
+      mail: this.$store.state.mail || "",
       comment: "",
       forenameError: " ",
       surnameError: " ",
@@ -103,14 +102,7 @@ export default {
         mail: this.mail,
         comment: this.comment,
       };
-      // Save data to local storage
-      this.saveData();
-      this.feedbacks.push(feedback);
-      // Reset input fields
-      this.forename = "";
-      this.surname = "";
-      this.mail = "";
-      this.comment = "";
+      this.$store.commit("addFeedback", feedback);
       this.handleSubmit();
       // Send feedback to the server
       fetch("http://localhost:3000/feedbacks", {
@@ -127,13 +119,11 @@ export default {
         .catch((error) => {
           console.error("Error:", error);
         });
+      this.forename = "";
+      this.surname = "";
+      this.mail = "";
+      this.comment = "";
     },
-    saveData() {
-      localStorage.setItem("forename", this.forename);
-      localStorage.setItem("surname", this.surname);
-      localStorage.setItem("mail", this.mail);
-    },
-
     validateForename() {
       if (this.forename.length < 1) {
         this.forenameError = "Forename must be at least 1 characters long";
@@ -201,14 +191,6 @@ export default {
     invisible() {
       this.submit.classList.add("invisible");
     },
-  },
-  saveData() {
-    const data = {
-      forename: this.forename,
-      surname: this.surname,
-      mail: this.mail,
-    };
-    localStorage.setItem("feedbackData", JSON.stringify(data));
   },
 };
 </script>

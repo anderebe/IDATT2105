@@ -1,9 +1,20 @@
-import { createStore } from "vuex";
+import Vuex from "vuex";
 
-export default createStore({
-  state: {},
-  getters: {},
-  mutations: {},
+export default new Vuex.Store({
+  state: {
+    forename: "",
+    surname: "",
+    mail: "",
+    feedbacks: [],
+  },
+  mutations: {
+    addFeedback(state, feedback) {
+      state.forename = feedback.forename;
+      state.surname = feedback.surname;
+      state.mail = feedback.mail;
+      state.feedbacks.push(feedback);
+    },
+  },
   actions: {},
   modules: {},
 });

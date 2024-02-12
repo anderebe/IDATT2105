@@ -5,9 +5,9 @@ describe("FeedbackContent", () => {
   let wrapper;
 
   global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve({}),
-  })
+    Promise.resolve({
+      json: () => Promise.resolve({}),
+    })
   );
 
   beforeEach(() => {
