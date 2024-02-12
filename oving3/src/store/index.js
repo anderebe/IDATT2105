@@ -5,14 +5,12 @@ export default new Vuex.Store({
     forename: "",
     surname: "",
     mail: "",
-    feedbacks: [],
   },
   mutations: {
     addFeedback(state, feedback) {
       state.forename = feedback.forename;
       state.surname = feedback.surname;
       state.mail = feedback.mail;
-      state.feedbacks.push(feedback);
     },
   },
   actions: {},

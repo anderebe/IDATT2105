@@ -68,9 +68,9 @@ export default {
   name: "FeedbackContent",
   data() {
     return {
-      forename: this.$store.state.forename || "",
-      surname: this.$store.state.surname || "",
-      mail: this.$store.state.mail || "",
+      forename: "",
+      surname: "",
+      mail: "",
       comment: "",
       forenameError: " ",
       surnameError: " ",

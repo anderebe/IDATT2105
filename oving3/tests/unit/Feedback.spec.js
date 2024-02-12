@@ -1,17 +1,36 @@
 import { shallowMount } from "@vue/test-utils";
 import FeedbackContent from "@/components/FeedbackContent.vue";
 
+
 describe("FeedbackContent", () => {
   let wrapper;
+  let state;
 
   global.fetch = jest.fn(() =>
     Promise.resolve({
       json: () => Promise.resolve({}),
     })
   );
+  
 
   beforeEach(() => {
-    wrapper = shallowMount(FeedbackContent);
+    state = {
+      forename: "",
+      surname: "",
+      mail: "",
+      comment: "",
+      forenameError: "",
+      surnameError: "",
+      mailError: "",
+      commentError: "",
+      feedbacks: []
+    };
+
+    wrapper = shallowMount(FeedbackContent, {
+      data() {
+        return state;
+      }
+    });
   });
 
   it("renders the component correctly", () => {
@@ -77,14 +96,24 @@ describe("FeedbackContent", () => {
     wrapper.vm.surname = "Doe";
     wrapper.vm.mail = "john.doe@example.com";
     wrapper.vm.comment = "This is a comment.";
+  
+    // Mock the $store object
+    wrapper.vm.$store = {
+      commit: jest.fn(),
+    };
+  
     wrapper.vm.feedbacksubmit();
-
-    expect(wrapper.vm.feedbacks.length).toBe(1);
-    expect(wrapper.vm.feedbacks[0].forename).toBe("John");
-    expect(wrapper.vm.feedbacks[0].surname).toBe("Doe");
-    expect(wrapper.vm.feedbacks[0].mail).toBe("john.doe@example.com");
-    expect(wrapper.vm.feedbacks[0].comment).toBe("This is a comment.");
-
+  
+    expect(wrapper.vm.$store.commit).toHaveBeenCalledWith(
+      "addFeedback",
+      expect.objectContaining({
+        forename: "John",
+        surname: "Doe",
+        mail: "john.doe@example.com",
+        comment: "This is a comment.",
+      })
+    );
+  
     expect(wrapper.vm.forename).toBe("");
     expect(wrapper.vm.surname).toBe("");
     expect(wrapper.vm.mail).toBe("");
