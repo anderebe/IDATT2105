@@ -64,24 +64,34 @@
 </template>
 
 <script>
+import $store from "../store/index.js";
 export default {
   name: "FeedbackContent",
   data() {
     return {
-      forename: this.$store.state.forename || "",
-      surname: this.$store.state.surname || "",
-      mail: this.$store.state.mail || "",
+      forename: $store.state.forename || "",
+      surname: $store.state.surname || "",
+      mail: $store.state.mail || "",
       comment: "",
-      forenameError: " ",
-      surnameError: " ",
-      mailError: " ",
-      commentError: " ",
+      forenameError: "",
+      surnameError: "",
+      mailError: "",
+      commentError: "",
       error: true,
       granted: false,
     };
   },
   methods: {
-    handleSubmit() {
+    feedbacksubmit() {
+      this.checkError();
+      let feedback = {
+        forename: this.forename,
+        surname: this.surname,
+        mail: this.mail,
+        comment: this.comment,
+      };
+      $store.commit("addFeedback", feedback);
+
       let submit = document.querySelector(".submit");
       setTimeout(() => {
         submit.textContent = "Success!";
@@ -93,17 +103,7 @@ export default {
           this.granted = false;
         }, 2000);
       }, 100);
-    },
-    feedbacksubmit() {
-      this.checkError();
-      let feedback = {
-        forename: this.forename,
-        surname: this.surname,
-        mail: this.mail,
-        comment: this.comment,
-      };
-      this.$store.commit("addFeedback", feedback);
-      this.handleSubmit();
+
       // Send feedback to the server
       fetch("http://localhost:3000/feedbacks", {
         method: "POST",
@@ -169,23 +169,31 @@ export default {
       } else {
         this.commentError = "";
       }
-      this.validateForename();
-      this.validateSurname();
-      this.validateMail();
       this.checkError();
     },
     checkError() {
       if (
-        this.error ||
         this.forenameError ||
         this.surnameError ||
         this.mailError ||
         this.commentError
       ) {
-        this.error = false;
+        this.error = true;
         this.granted = false;
         return;
       }
+      if (
+        this.forename.length < 1 ||
+        this.surname.length < 1 ||
+        this.mail.length < 1 ||
+        this.comment.length < 1
+      ) {
+        this.error = true;
+        this.granted = false;
+        return;
+      }
+
+      this.error = false;
       this.granted = true;
     },
     invisible() {
